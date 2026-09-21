@@ -27,6 +27,8 @@ export function TasksProvider({ children }: { children: ReactNode }) {
   return <TasksContext.Provider value={{ tasks, dispatch }}>{children}</TasksContext.Provider>;
 }
 
+// This hook intentionally shares the context module with its provider.
+// eslint-disable-next-line react-refresh/only-export-components
 export function useTasks() {
   const ctx = useContext(TasksContext);
   if (!ctx) throw new Error("useTasks must be used inside <TasksProvider>");
