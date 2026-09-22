@@ -3,6 +3,8 @@ import cors from "cors"
 import { logger } from "./middleware/logger"
 import { errorHandler } from "./middleware/error"
 import { taskRouter } from "./routes/tasks"
+import { authRouter } from "./routes/auth";
+import { requireAuth } from "./middleware/auth";
 
 export const app = express()
 
@@ -13,6 +15,7 @@ app.use(logger)
 app.get("/api/health", (_req, res) => {
     res.json({ status: "ok" })
 })
+app.use("/api/auth", authRouter)
 app.use("/api/tasks", taskRouter)
 
 app.use((_req, res) => {
