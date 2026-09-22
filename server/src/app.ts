@@ -1,6 +1,7 @@
 import express from "express"
 import cors from "cors"
 import { logger } from "./middleware/logger"
+import { errorHandler } from "./middleware/error-handler"
 import { taskRouter } from "./routes/tasks"
 
 export const app = express()
@@ -13,3 +14,5 @@ app.get("/api/health", (_req, res) => {
     res.json({ status: "ok" })
 })
 app.use("/api/tasks", taskRouter)
+
+app.use(errorHandler)
